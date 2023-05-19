@@ -1,13 +1,26 @@
 const expenses = [];
 
-const inputNode = document.querySelector('.js-input');
-const buttonNode = document.querySelector('.js-button');
+
+const inputNode = document.getElementById('input')
+const buttonNode = document.getElementById('add-btn');
+const historyNode = document.getElementById('history')
+
 
 buttonNode.addEventListener('click', function(){
+    // get input value
     if (inputNode.value == '' || inputNode.value == NaN || inputNode.value == null) return;
 
     const expense = parseInt(inputNode.value);
-    console.log(expense, typeof expense);
     inputNode.value = '';
-    console.log(expenses)
+
+    // Save value 
+    expenses.push(expense);
+
+    // Expenses history
+    let expensesListHTML = '';
+    expenses.forEach(el => {
+        expensesListHTML += `<li>${el}</li>`;
+    });
+    const html = `<ol>${expensesListHTML}</ol>`
+    historyNode.innerHTML = html;
 })

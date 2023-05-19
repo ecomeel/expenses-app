@@ -8,9 +8,21 @@
     <title>Expenses App</title>
 </head>
 <body>
-    <h1>Учет расходов</h1>
-    <input class="js-input" type="number">
-    <button class="js-button">Добавить</button>
+    <div class="expenses">
+        <h1 class="expenses__title">Учет расходов</h1>
+        <input 
+            class="expenses__input" 
+            id="input" 
+            type="number">
+        <button class="expenses__add-btn" id="add-btn">Добавить</button>
+
+        <h2 class="expenses__history-title">История затрат</h2>
+        <div class="expenses__history" id="history">
+            
+        </div>
+    </div>
+
+
     <script src="js/code.js"></script>
 
 </body>
