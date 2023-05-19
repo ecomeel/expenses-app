@@ -1,11 +1,15 @@
+const LIMIT = 10000;
+
 const expenses = [];
 
-
-const inputNode = document.getElementById('input')
+const inputNode = document.getElementById('input');
 const buttonNode = document.getElementById('add-btn');
 const historyNode = document.getElementById('history');
 const totalNode = document.getElementById('sum');
+const limitNode = document.getElementById('limit');
+const statusNode = document.getElementById('status');
 
+limitNode.innerText = LIMIT;
 
 buttonNode.addEventListener('click', function(){
     // get input value
@@ -31,4 +35,9 @@ buttonNode.addEventListener('click', function(){
         sum += el;
     });
     totalNode.innerText = sum
+
+    // Comparison with the limit and status output
+    if (sum > LIMIT) {
+        statusNode.innerText = 'Badly';
+    }
 })
