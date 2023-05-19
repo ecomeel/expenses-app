@@ -1,3 +1,6 @@
-h1 {
-    color: red;
+.status {
+    color: green;
+    &_red {
+        color: red;
+    }
 }
