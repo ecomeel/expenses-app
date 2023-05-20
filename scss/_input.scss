@@ -1,5 +1,18 @@
-.moneyInput__input {
+.expensesInput {
     width: 484px;
+}
+.moneyInput {
     height: 58px;
-    box-sizing: border-box;
+
+    padding: 10px 17px 9px 22px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    border: 1px solid black;
+
+    &__input {
+        width: 100%;
+        border: none;
+        font: inherit;
+    }
 }

@@ -1,3 +1,17 @@
 .stats {
     width: 484px;
+    &__limit {
+        margin-bottom: 13px;
+    }
+    &__total {
+        margin-bottom: 35px;
+    }
+    &__statusText {
+        &_positive {
+            color: green;
+        }
+        &_negative {
+            color: red;
+        }
+    }
 }
