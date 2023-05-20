@@ -76,6 +76,16 @@ body {
   content: " руб.";
 }
 
+.btn {
+  height: 58px;
+  font: inherit;
+  color: white;
+  border: none;
+}
+.btn:hover {
+  opacity: 0.7;
+}
+
 .expensesInput {
   width: 484px;
 }
@@ -96,14 +106,7 @@ body {
 
 .addButton {
   width: 370px;
-  height: 58px;
-  font: inherit;
-  color: white;
   background-color: #0094FF;
-  border: none;
-}
-.addButton:hover {
-  opacity: 0.7;
 }
 
 .stats {
@@ -129,6 +132,12 @@ body {
 ol {
   list-style: decimal;
   list-style-position: inside;
+}
+
+.clearButton {
+  margin-top: 69px;
+  width: 484px;
+  background-color: #FF0000;
 }
 
 h1 {
