@@ -6,7 +6,6 @@ const EMPTY_INPUT_ERROR_CLASSNAME = "red-border";
 const STORAGE_LABEL_LIMIT = "limit";
 const STORAGE_LABEL_EXPENSES = "expenses";
 
-
 const inputNode = document.getElementById("expensesInput");
 const moneyInputNode = document.getElementById("moneyInput");
 const categorySelectNode = document.getElementById("categorySelect");
