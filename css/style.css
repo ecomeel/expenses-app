@@ -95,6 +95,10 @@ body {
   background-color: #0094FF;
 }
 
+.red-border {
+  border: 4px solid rgba(255, 0, 0, 0.533) !important;
+}
+
 .expensesInput {
   width: 484px;
 }
