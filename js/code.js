@@ -1,5 +1,7 @@
 const STATUS_IN_LIMIT = "все хорошо";
 const STATUS_OUT_OF_LIMIT = "все плохо";
+const POPUP_OPENED_CLASSNAME = 'popup_opened';
+const BODY_FIXED_CLASSNAME = 'body_fixed';
 
 const inputNode = document.getElementById('expensesInput');
 const categorySelectNode = document.getElementById('categorySelect')
@@ -10,9 +12,17 @@ const totalValueNode = document.getElementById('totalValue');
 const statusNode = document.getElementById('statusText');
 const historyList = document.getElementById('historyList');
 
+const openBtnChangeLimit = document.getElementById('openBtnChangeLimit');
+const closeBtnChangeLimit = document.getElementById('closeBtnChangeLimit')
+const bodyNode = document.querySelector('body');
+const popupNode = document.getElementById('popupChangeLimit');
+const popupContentNode = document.getElementById('popupContent');
+const newLimitInput = document.getElementById('newLimitInput');
+const saveNewLimitBtn = document.getElementById('saveNewLimitBtn');
+
 
 let expenses = [];
-const limit = parseInt(limitNode.innerText);
+let limit = parseInt(limitNode.innerText);
 
 const getTotal = () => {
     let sum = 0;
@@ -51,9 +61,25 @@ const render = () => {
     renderHistory();
 }
 
+const togglePopup = () => {
+    popupNode.classList.toggle(POPUP_OPENED_CLASSNAME);
+    bodyNode.classList.toggle(BODY_FIXED_CLASSNAME);
+}
+
+const clickOutsidePopup = (event) => {
+    const isClickOutsideContent = !event.composedPath().includes(popupContentNode)
+
+    if (isClickOutsideContent) {
+        togglePopup();
+    }
+}
+
+const getNewLimitFromUser = () => parseInt(newLimitInput.value);
+
 const getExpenseFromUser = () => parseInt(inputNode.value);
 
-const getSelectedCategory = () => categorySelectNode.value
+const getSelectedCategory = () => categorySelectNode.value;
+
 
 const clearInput = () => {
     inputNode.value = '';
@@ -82,5 +108,25 @@ const clearButtonHandler = () => {
     render();
 }
 
+function changeLimitHandler () {
+    togglePopup();
+    saveNewLimitBtn.addEventListener('click', () => {
+        const newLimit = getNewLimitFromUser();
+        if (!newLimit) return
+
+        limitNode.innerText = newLimit;
+        limit = newLimit;
+
+        render();
+        togglePopup();
+    })
+    popupNode.addEventListener('click', clickOutsidePopup);
+    closeBtnChangeLimit.addEventListener('click', togglePopup);   
+}
+
+
 addButtonNode.addEventListener('click', addButtonHandler);
 clearButtonNode.addEventListener('click', clearButtonHandler);
+openBtnChangeLimit.addEventListener('click', changeLimitHandler);
+
+
