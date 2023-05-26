@@ -1,0 +1,26 @@
+.expensesInput {
+    width: 484px;
+}
+.moneyInput {
+    height: 58px;
+
+    padding: 10px 17px 9px 22px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    border: 1px solid black;
+
+    &__input {
+        width: 100%;
+        border: none;
+        font: inherit;
+    }
+}
+.categorySelect {
+    margin-top: 18px;
+    width: 484px;
+    height: 58px;
+    padding-left: 22px;
+    font: inherit;
+    border: 1px solid black;
+}

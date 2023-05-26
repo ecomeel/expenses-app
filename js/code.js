@@ -1,76 +1,132 @@
-const LIMIT = 10000;
-const CURRENCY = "руб.";
-const STATUS_BAD = "Badly";
-const STATUS_BAD_CLASSNAME = "status_red";
+const STATUS_IN_LIMIT = "все хорошо";
+const STATUS_OUT_OF_LIMIT = "все плохо";
+const POPUP_OPENED_CLASSNAME = 'popup_opened';
+const BODY_FIXED_CLASSNAME = 'body_fixed';
 
-const inputNode = document.getElementById("input");
-const buttonNode = document.getElementById("add-btn");
-const historyNode = document.getElementById("history");
-const sumNode = document.getElementById("sum");
-const limitNode = document.getElementById("limit");
-const statusNode = document.getElementById("status");
+const inputNode = document.getElementById('expensesInput');
+const categorySelectNode = document.getElementById('categorySelect')
+const addButtonNode = document.getElementById('addButton');
+const clearButtonNode = document.getElementById('clearButton');
+const limitNode = document.getElementById('limitValue');
+const totalValueNode = document.getElementById('totalValue');
+const statusNode = document.getElementById('statusText');
+const historyList = document.getElementById('historyList');
 
-const expenses = [];
+const openBtnChangeLimit = document.getElementById('openBtnChangeLimit');
+const closeBtnChangeLimit = document.getElementById('closeBtnChangeLimit')
+const bodyNode = document.querySelector('body');
+const popupNode = document.getElementById('popupChangeLimit');
+const popupContentNode = document.getElementById('popupContent');
+const newLimitInput = document.getElementById('newLimitInput');
+const saveNewLimitBtn = document.getElementById('saveNewLimitBtn');
 
-init(expenses);
 
-buttonNode.addEventListener("click", function () {
-  const expense = getExpenseFromUser();
-  if (!expense) {
-    return
-  }
-  trackExpense(expense);
-  render(expenses);
-});
+let expenses = [];
+let limit = parseInt(limitNode.innerText);
 
-function init(expenses) {
-  limitNode.innerText = LIMIT;
-  sumNode.innerText = calculateExpenses(expenses);
+const getTotal = () => {
+    let sum = 0;
+    expenses.forEach((expense) => {
+        sum += expense.amount;
+    })
+    return sum;
 }
-function trackExpense(expense) {
-  expenses.push(expense);
+
+const renderStatus = () => {
+    const total = getTotal(expenses);
+    totalValueNode.innerText = total;
+
+    if (total <= limit) {
+        statusNode.innerText = STATUS_IN_LIMIT;
+        statusNode.className = "stats__statusText_positive";
+    } else {
+        statusNode.innerText = `${STATUS_OUT_OF_LIMIT} (${limit-total} руб.)`;
+        statusNode.className = "stats__statusText_negative";
+    }
 }
-function getExpenseFromUser() {
-  if (
-    inputNode.value == "" ||
-    inputNode.value == NaN ||
-    inputNode.value == null
-  )
-    return;
-  const expense = parseInt(inputNode.value);
-  clearInput();
-  return expense;
+
+const renderHistory = () => {
+    historyList.innerHTML = "";
+    expenses.forEach(expense => {
+        const historyItem = document.createElement("li");
+        historyItem.className = "rub";
+        historyItem.innerText = `${expense.category} - ${expense.amount}`;
+
+        historyList.appendChild(historyItem);
+    });
 }
-function clearInput() {
-  inputNode.value = "";
+
+const render = () => {
+    renderStatus();
+    renderHistory();
 }
-function calculateExpenses(expenses) {
-  let sum = 0;
-  expenses.forEach((el) => {
-    sum += el;
-  });
-  return sum;
+
+const togglePopup = () => {
+    popupNode.classList.toggle(POPUP_OPENED_CLASSNAME);
+    bodyNode.classList.toggle(BODY_FIXED_CLASSNAME);
 }
-function render(expenses) {
-  const sum = calculateExpenses(expenses);
-  renderHistory(expenses);
-  renderSum(sum);
-  renderStatus(sum);
+
+const clickOutsidePopup = (event) => {
+    const isClickOutsideContent = !event.composedPath().includes(popupContentNode)
+
+    if (isClickOutsideContent) {
+        togglePopup();
+    }
 }
-function renderHistory(expenses) {
-  let expensesListHTML = "";
-  expenses.forEach((el) => {
-    expensesListHTML += `<li>${el} ${CURRENCY}</li>`;
-  });
-  const html = `<ol>${expensesListHTML}</ol>`;
-  historyNode.innerHTML = html;
+
+const getNewLimitFromUser = () => parseInt(newLimitInput.value);
+
+const getExpenseFromUser = () => parseInt(inputNode.value);
+
+const getSelectedCategory = () => categorySelectNode.value;
+
+
+const clearInput = () => {
+    inputNode.value = '';
 }
-function renderSum(sum) {
-  sumNode.innerText = sum;
+
+function addButtonHandler() {
+    const currentAmount = getExpenseFromUser();
+    if (!currentAmount) return
+
+    const currentCategory = getSelectedCategory();
+    if (currentCategory === 'Категория') return
+
+    const newExpense = {amount: currentAmount, category: currentCategory}
+    console.log(newExpense);
+
+    expenses.push(newExpense);
+
+    console.log(expenses);
+
+    render();
+    clearInput();
 }
-function renderStatus(sum) {
-  if (sum > LIMIT) {
-    statusNode.innerText = STATUS_BAD;
-    statusNode.classList.add(STATUS_BAD_CLASSNAME);
-  }
+
+const clearButtonHandler = () => {
+    expenses = [];
+    render();
 }
+
+function changeLimitHandler () {
+    togglePopup();
+    saveNewLimitBtn.addEventListener('click', () => {
+        const newLimit = getNewLimitFromUser();
+        if (!newLimit) return
+
+        limitNode.innerText = newLimit;
+        limit = newLimit;
+
+        render();
+        togglePopup();
+    })
+    popupNode.addEventListener('click', clickOutsidePopup);
+    closeBtnChangeLimit.addEventListener('click', togglePopup);   
+}
+
+
+addButtonNode.addEventListener('click', addButtonHandler);
+clearButtonNode.addEventListener('click', clearButtonHandler);
+openBtnChangeLimit.addEventListener('click', changeLimitHandler);
+
+

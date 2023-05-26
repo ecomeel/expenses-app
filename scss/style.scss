@@ -1,6 +1,21 @@
-.status {
-    color: green;
-    &_red {
-        color: red;
-    }
+@import "reset";
+
+@import "init-styles";
+@import "common-styles";
+@import "input";
+@import "stats";
+@import "history";
+@import "clearBtn";
+
+h1 {
+    margin-top: 67px;
 }
+.expenses {
+    margin-top: 41px;
+    width: 1000px;
+    display: flex;
+    flex-wrap: wrap;
+    column-gap: 28px;
+    row-gap: 43px;
+}
+

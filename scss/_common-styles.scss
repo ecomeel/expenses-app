@@ -1,0 +1,23 @@
+.label {
+    font-weight: 700;
+}
+
+.rub::after {
+    content: " руб."
+}
+
+.btn {
+    height: 58px;
+    font: inherit;
+    color: white;
+    border: none;
+
+    &:hover {
+        opacity: .7;
+    }
+
+    &_blue {
+        width: 370px;
+        background-color: #0094FF;
+    }
+}
