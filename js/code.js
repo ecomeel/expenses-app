@@ -3,6 +3,9 @@ const STATUS_OUT_OF_LIMIT = "все плохо";
 const POPUP_OPENED_CLASSNAME = "popup_opened";
 const BODY_FIXED_CLASSNAME = "body_fixed";
 const EMPTY_INPUT_ERROR_CLASSNAME = "red-border";
+const STORAGE_LABEL_LIMIT = "limit";
+const STORAGE_LABEL_EXPENSES = "expenses";
+
 
 const inputNode = document.getElementById("expensesInput");
 const moneyInputNode = document.getElementById("moneyInput");
@@ -26,18 +29,24 @@ const limitNode = document.getElementById("limitValue");
 let limit = parseInt(limitNode.innerText);
 
 function initLimit() {
-  const limitFromStorage = parseInt(localStorage.getItem("limit"));
+  const limitFromStorage = parseInt(localStorage.getItem(STORAGE_LABEL_LIMIT));
   if (!limitFromStorage) {
     return;
   }
   limitNode.innerText = limitFromStorage;
+  limit = parseInt(limitNode.innerText);
+}
+initLimit();
+
+const expensesFromStorageString = localStorage.getItem(STORAGE_LABEL_EXPENSES);
+const expensesFromStorage = JSON.parse(expensesFromStorageString);
+let expenses = [];
+if (Array.isArray(expensesFromStorage)) {
+    expenses = expensesFromStorage;
+    render();
 }
 
-// initLimit();
-
-let expenses = [];
-
-const getTotal = () => {
+function getTotal() {
   let sum = 0;
   expenses.forEach((expense) => {
     sum += expense.amount;
@@ -45,7 +54,7 @@ const getTotal = () => {
   return sum;
 };
 
-const renderStatus = () => {
+function renderStatus() {
   const total = getTotal(expenses);
   totalValueNode.innerText = total;
 
@@ -58,7 +67,7 @@ const renderStatus = () => {
   }
 };
 
-const renderHistory = () => {
+function renderHistory() {
   historyList.innerHTML = "";
   expenses.forEach((expense) => {
     const historyItem = document.createElement("li");
@@ -69,10 +78,15 @@ const renderHistory = () => {
   });
 };
 
-const render = () => {
-  renderStatus();
-  renderHistory();
-};
+// const render = () => {
+//   renderStatus();
+//   renderHistory();
+// };
+
+function render() {
+    renderHistory();
+    renderStatus();
+}
 
 const togglePopup = () => {
   popupNode.classList.toggle(POPUP_OPENED_CLASSNAME);
@@ -97,6 +111,11 @@ const clearInput = (input) => {
   input.value = "";
 };
 
+function saveExpenseToLocal() {
+    const expensesString = JSON.stringify(expenses);
+    localStorage.setItem(STORAGE_LABEL_EXPENSES, expensesString);
+}
+
 function addButtonHandler() {
   const currentAmount = getValueFromUser(inputNode);
   const currentCategory = getSelectedCategory();
@@ -112,11 +131,9 @@ function addButtonHandler() {
   categorySelectNode.classList.remove(EMPTY_INPUT_ERROR_CLASSNAME);
 
   const newExpense = { amount: currentAmount, category: currentCategory };
-  console.log(newExpense);
 
   expenses.push(newExpense);
-
-  console.log(expenses);
+  saveExpenseToLocal();
 
   render();
   clearInput(inputNode);
@@ -139,7 +156,7 @@ function changeLimitHandler() {
 
     limitNode.innerText = newLimit;
     limit = newLimit;
-    localStorage.setItem("limit", newLimit);
+    localStorage.setItem(STORAGE_LABEL_LIMIT, newLimit);
 
     clearInput(newLimitInput);
 
