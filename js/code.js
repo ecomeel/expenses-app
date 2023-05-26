@@ -74,19 +74,17 @@ const clickOutsidePopup = (event) => {
     }
 }
 
-const getNewLimitFromUser = () => parseInt(newLimitInput.value);
-
-const getExpenseFromUser = () => parseInt(inputNode.value);
+const getValueFromUser = (input) => parseInt(input.value)
 
 const getSelectedCategory = () => categorySelectNode.value;
 
 
-const clearInput = () => {
-    inputNode.value = '';
+const clearInput = (input) => {
+    input.value = '';
 }
 
 function addButtonHandler() {
-    const currentAmount = getExpenseFromUser();
+    const currentAmount = getValueFromUser(inputNode);
     if (!currentAmount) return
 
     const currentCategory = getSelectedCategory();
@@ -100,7 +98,7 @@ function addButtonHandler() {
     console.log(expenses);
 
     render();
-    clearInput();
+    clearInput(inputNode);
 }
 
 const clearButtonHandler = () => {
@@ -111,11 +109,12 @@ const clearButtonHandler = () => {
 function changeLimitHandler () {
     togglePopup();
     saveNewLimitBtn.addEventListener('click', () => {
-        const newLimit = getNewLimitFromUser();
+        const newLimit = getValueFromUser(newLimitInput);
         if (!newLimit) return
 
         limitNode.innerText = newLimit;
         limit = newLimit;
+        clearInput(newLimitInput);
 
         render();
         togglePopup();
