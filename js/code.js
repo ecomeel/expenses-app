@@ -78,11 +78,6 @@ function renderHistory() {
   });
 };
 
-// const render = () => {
-//   renderStatus();
-//   renderHistory();
-// };
-
 function render() {
     renderHistory();
     renderStatus();
