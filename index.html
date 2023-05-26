@@ -26,6 +26,13 @@
             id="expensesInput"
           />
         </div>
+        <select id="categorySelect" class="categorySelect">
+            <option value="Категория" hidden disabled selected>Категория</option>
+            <option value="Продукты">Продукты</option>
+            <option value="Кафе">Кафе и рестораны</option>
+            <option value="Квартира">Квартира</option>
+            <option value="Авто">Авто</option>
+        </select>
       </div>
       <button class="addButton btn" id="addButton">Добавить</button>
       <div class="stats">
@@ -35,7 +42,7 @@
         </div>
         <div class="stats__total">
           <span class="label">Всего:</span>
-          <span class="rub" id="totalValue">100</span>
+          <span class="rub" id="totalValue">0</span>
         </div>
         <div class="stats__status">
           <span class="label">Статус:</span>
@@ -47,7 +54,6 @@
       <div class="history">
         <div class="history__title label">История:</div>
         <ol class="history__list" id="historyList">
-          <li class="rub">100</li>
         </ol>
       </div>
     </div>
