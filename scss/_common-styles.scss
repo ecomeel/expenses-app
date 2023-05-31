@@ -3,7 +3,7 @@
 }
 
 .rub::after {
-    content: " руб."
+    content: " rub."
 }
 
 .btn {
@@ -11,6 +11,7 @@
     font: inherit;
     color: white;
     border: none;
+    border-radius: 15px;
 
     &:hover {
         opacity: .7;

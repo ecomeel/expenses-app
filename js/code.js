@@ -1,5 +1,5 @@
-const STATUS_IN_LIMIT = "все хорошо";
-const STATUS_OUT_OF_LIMIT = "все плохо";
+const STATUS_IN_LIMIT = "Good";
+const STATUS_OUT_OF_LIMIT = "Bad";
 const POPUP_OPENED_CLASSNAME = "popup_opened";
 const BODY_FIXED_CLASSNAME = "body_fixed";
 const EMPTY_INPUT_ERROR_CLASSNAME = "red-border";

@@ -9,14 +9,14 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Dosis:wght@400;700&display=swap"
       rel="stylesheet"
     />
     <title>Expenses App</title>
   </head>
   <body>
     <div class="container">
-      <h1 class="label">Учет расходов</h1>
+      <h1 class="label">Сost accounting</h1>
       <div class="expenses">
         <div class="expensesInput">
           <div id="moneyInput" class="moneyInput rub">
@@ -29,17 +29,19 @@
             />
           </div>
           <select id="categorySelect" class="categorySelect">
-            <option value="Категория" hidden disabled selected>Категория</option>
-            <option value="Продукты">Продукты</option>
-            <option value="Кафе">Кафе и рестораны</option>
-            <option value="Квартира">Квартира</option>
-            <option value="Авто">Авто</option>
+            <option value="Категория" hidden disabled selected>
+              Categories
+            </option>
+            <option value="Products">Products</option>
+            <option value="Restaurants">Restaurants</option>
+            <option value="Apartment">Apartment</option>
+            <option value="Auto">Auto</option>
           </select>
         </div>
-        <button class="btn btn_blue" id="addButton">Добавить</button>
+        <button class="btn btn_blue" id="addButton">Add expense</button>
         <div class="stats">
           <div class="stats__limit">
-            <span class="label">Лимит:</span>
+            <span class="label">Limit:</span>
             <span class="rub" id="limitValue">10000</span>
             <img
               id="openBtnChangeLimit"
@@ -49,7 +51,7 @@
             />
             <div id="popupChangeLimit" class="popup-change-limit">
               <div id="popupContent" class="change-limit__content">
-                <h3 class="change-limit__title">Новый лимит</h3>
+                <h3 class="change-limit__title">New limit</h3>
                 <img
                   id="closeBtnChangeLimit"
                   class="change-limit__closeBtn"
@@ -68,28 +70,30 @@
                       />
                     </div>
                   </div>
-                  <button class="btn_blue btn" id="saveNewLimitBtn">Сохранить лимит</button>
+                  <button class="btn_blue btn" id="saveNewLimitBtn">
+                    Save limit
+                  </button>
                 </div>
               </div>
             </div>
           </div>
           <div class="stats__total">
-            <span class="label">Всего:</span>
+            <span class="label">Total:</span>
             <span class="rub" id="totalValue">0</span>
           </div>
           <div class="stats__status">
-            <span class="label">Статус:</span>
+            <span class="label">Status:</span>
             <span class="stats__statusText_positive" id="statusText"
-              >все хорошо</span
+              >Good</span
             >
           </div>
         </div>
         <div class="history">
-          <div class="history__title label">История:</div>
+          <div class="history__title label">History:</div>
           <ol class="history__list" id="historyList"></ol>
         </div>
       </div>
-      <button class="clearButton btn" id="clearButton">Сбросить расходы</button>
+      <button class="clearButton btn" id="clearButton">Reset expenses</button>
     </div>
     <script src="js/code.js"></script>
   </body>

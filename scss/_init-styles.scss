@@ -1,12 +1,21 @@
 body {
     width: 100%;
+    position: relative;
     background-color: #fff;
-    font-family: Inter, sans-serif;
+    font-family: Dosis, sans-serif;
     font-size: 32px;
     font-weight: 38.73px;
     font-weight: 400;
+    color: #fff;
     padding-bottom: 30px;
+
+    background-image: url('/img/bck.jpg');
+    background-position: 50% 50%;
+    background-size: cover;
+    background-repeat: no-repeat;
 }
+
+
 
 .container {
     width: 1050px;
